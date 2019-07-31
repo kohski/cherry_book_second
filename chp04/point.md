@@ -28,3 +28,6 @@
   odds = numbers.select{|n| n.odd?}
   odds = numbers.select(&:odd?) # => [1, 3, 5]
 ```
+
+
+
