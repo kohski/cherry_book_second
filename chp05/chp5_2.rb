@@ -11,5 +11,5 @@ end
 
 # keyword引数は省略可能
 buy_burger('teriyaki') # => "menu: teriyaki / potato: true /drink: true"
-# keyword引数は省略可能
+# keyword引数は入れ替えも可能
 buy_burger('teriyaki', drink: false, potato: false) # => "menu: teriyaki / potato: false /drink: false"
