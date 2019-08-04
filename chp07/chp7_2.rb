@@ -26,7 +26,7 @@ class User
   end
 end
 
-user = User.new("tim",27) # => #<User:0x00007f90aa04e718 @name="tim", @age=27>
+user = User.new("tim",27) # => #<User:0x00007fec6b85a660 @name="tim", @age=27>
 user.hello # => "Hello!"
 user.name # => "tim"
 user.name = "tum" # => "tum"
@@ -39,9 +39,6 @@ users.each do |user| # !> shadowing outer local variable - user
   p user
 end
 
-# ~> -:3:in `initialize': wrong number of arguments (given 1, expected 2) (ArgumentError)
-# ~> 	from -:25:in `new'
-# ~> 	from -:25:in `block in create_users'
-# ~> 	from -:25:in `map'
-# ~> 	from -:25:in `create_users'
-# ~> 	from -:37:in `<main>'
+# >> #<User:0x00007fec6b8b7db0 @name="Yoko", @age=30>
+# >> #<User:0x00007fec6b8b7d88 @name="Miyamoto", @age=30>
+# >> #<User:0x00007fec6b8b7d38 @name="Nagamine", @age=30>
