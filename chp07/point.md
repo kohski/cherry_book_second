@@ -41,6 +41,7 @@ end
 - [instance | class].is_a?('Class') => 親でも祖父母でもtrueになる
 - [instance].instance_of?('Class') => 親のみ該当
 - [instance | class].methods => methodの一覧
+- responed_to?() => メソッドがあるか否か
 - 典型的な例
   - <で継承
   - initialize内でsuper(**arguments)すれば親クラスのinitもいける
@@ -154,3 +155,38 @@ DVD.hello # => "hello! definited in Product class"
   - alias :新 :旧
   - undef :method_name メソッドの削除
   - ネストしたクラスはclass::classで表現
+- 等価を表す演算子
+  - eqaul? => object_idの一致
+  - == できるだけ一致するようにRubyが判断(1 == 1.0 true)
+  - eql? => hashのキーとして使用できるかを判定できる
+  - === 正規表現の一致を見る
+- オープンクラスとモンキーパッチ
+  - だれでもクラスを参照可能
+  - 同名メソッドを定義すれば制限なく上書きできる
+  - alias :hello_original :helloと上書きを作っておいて、それから:helloをモンキーパッチするのも多い
+- 特異メソッド
+  - インスタンス特有のメソッド。
+    ```rb
+    alice = "I am Alice"
+    def alice.shuffle
+      chars.shuffle.join
+    end
+
+    class << alice
+      def shuffle
+        chars.shuffle.join
+      end
+    end
+    ```
+  - この概念を拡張すると、そもそもクラスメソッド自体が特異メソッドと言える。
+- ducktyping
+  ```rb
+  def display_name(object)
+    puts "Name is <<#{object.name}>>"
+  end
+  ```
+  このメソッドからだと、nameメソッドを持ってるオブジェクトは全部いける。
+  静的型付言語だとコンパイル時にobjectの検証が入る。
+  この自由度がRubyのデメリットであり、柔軟性を与えてもいる。
+　
+  なのでメソッドを持っているかが重要。それをチェックするのが、respond_to?
